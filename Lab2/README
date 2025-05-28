@@ -1,0 +1,22 @@
+Full Name: Pree Simphliphan
+BU Email: prees26@bu.edu
+
+For me I chose to print "A timer already existed" and A timer Hello has been updated in kernel.
+Becasue I encountered an issue where -s option write sec and msg from user input to device driver and when I immidiately read buffer from device driver.
+It read sec and msg instead of response that I wrote in my_timer_write to copy_to_user. I guess kernel didn't proceed to write back in time before user program read
+it from device driver.
+
+I tried two methods: first keep reading until the length of what user program read from device driver match the length of what we expected (which is 24 for " A timer
+Alreafdy existed" and 24 + len(timer name) for " A timer ... has been updated) but these cause too much loop to crash kernel. Second way, I stall a time 100 ms in ktimer.c
+but it seems to stop all the program and don't proceed anything in kernel. So I will keep it this way, print those two messages in kernel (but for -l option, since it only
+read device driver, these one I am able to make it right format printing it by user program.)
+
+After 15 hours, I finally fixed it!
+
+
+Link Reference: 
+1. Basic Timer Module: https://stackoverflow.com/questions/10812858/how-to-use-timers-in-linux-kernel-device-drivers
+2. Kernel Timer API: https://embetronicx.com/tutorials/linux/device-drivers/using-kernel-timer-in-linux-device-driver/
+3. list for kernel: https://www.kernel.org/doc/html/v4.19/core-api/kernel-api.html
+4. sscanf: https://linux.die.net/man/3/sscanf
+5. (Not Important for this assignment but to get better understanding) Messagin Logging in Kernel: https://docs.kernel.org/core-api/printk-basics.html

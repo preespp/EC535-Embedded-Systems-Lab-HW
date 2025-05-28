@@ -1,0 +1,11 @@
+Full Name: Pree Simphliphan
+BU Email: prees26@bu.edu
+
+7 pm - 6 am in one day. I was having two midterms so I just started on Thursday. It's been challenging and I started from scratch to avoid any issue between fasync and
+our old module in device driver. 
+
+Link Reference: 
+1. basic code: https://devarea.com/linux-kernel-development-creating-a-proc-file-and-interfacing-with-user-space/
+2. pid function: https://www.linuxquestions.org/questions/linux-software-2/linux-module-current-pid-4175476940/
+3. I was troubleshotting this function: https://tldp.org/HOWTO/SCSI-Generic-HOWTO/fcntl.html
+4. proc official document for linux: https://docs.kernel.org/filesystems/proc.html

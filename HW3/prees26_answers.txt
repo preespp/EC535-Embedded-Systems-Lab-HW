@@ -1,0 +1,29 @@
+-------------------------------------------------------------------
+Profiling Results from Pree Simphliphan U01702082 XingJian Jiang U03912429
+-------------------------------------------------------------------
+
+qsort_large spends <100.95>% of its time executing the function <compare> based on the flat profile.
+
+
+-------------------------------------------------------------------
+Optimization
+-------------------------------------------------------------------
+
++-----------------------+--------------------+--------------------+
+|Optimizations          |Time on eng-grid    |Time on BeagleBone  |
++-----------------------+--------------------+--------------------+
+|Default                | 0m0.059s           | 0m0.670s           |
++-----------------------+--------------------+--------------------+
+|myOptimization1        | 0m0.047s           | 0m0.510s           |
++-----------------------+--------------------+--------------------+
+|myOptimization2        | 0m0.046s           | 0m0.530s           |
++-----------------------+--------------------+--------------------+
+|Optional 1 & 2 combined| 0m0.042s           | 0m0.470s           |
++-----------------------+--------------------+--------------------+
+
+myOptimization1: Our best optimization for first case, we only change the complier flag to optimize performance.
+We use -O3 for advanced compiler optimizations (e.g., inlining, vectorization) and -funroll-loops to replicate loop bodies, reducing branch overhead in tight loops for faster execution.
+
+myOptimization2: Our second optimization uses mergesort with distance squared (no sqrt) to remove function-pointer overhead from qsort, ensuring O(n log n) performance, we don't need square function for comparison and change data type to 64 bits.
+
+Difference btw grid and embedded: BU ENG Grid outperforms BeagleBone because of intel i7 9th gen with faster memory, and HPC scheduling. BeagleBone’s limited hardware resources cause slower performance and longer execution times

@@ -1,0 +1,23 @@
+Full Name: Pree Simphliphan
+BU Email: prees26@bu.edu
+
+Change I made to minimize part 4:
+
+For zImage, I rebuilt kernel image after adjusting some configuration. Mostly I disable networking support and some device drivers since
+they are main config that takes a lot of space and some of them we don't need it in this assignments such as IP, I2C, SPI, GNSS, etc. (More hardware involvement)
+
+For rootfs.img, after all adjustment from previous step (except busybox),  I run du -sh $WORKSPACE/rootfs to check the actual size of
+the folder which result in 14MiB which means we can change the default command when creating the blank disk image from count=128 to 15 then step down
+because there are some unused space in folder. I got that when I did count = 12 there is not enough space. Therefore, I used image's size as 13 MiB.
+
+After this, I rub  e2fsck -f rootfs.img and resize2fs -M rootfs.img to shrink filesystem to actual size becasue of some unused space to 12.8 MiB.
+
+The reason why I don't delete in the first place, because I disable a lot of command and support from busy box to free space to 10 MiB but it
+appeared that it disabled root login (require password) So I enable defconfig to check, then disable archieve mode, some editors and few commands as possible.
+So that other functionalities didn't get affected from this.
+
+And did the same process as before; in conclusion my final minimized size of kernel image (zImage) is 8.0 MiB and size of rootfs.img is 12.5 MiB.
+
+Latest update: I disable some small features on hardware such as USB additionally in kernel linux and it gave the smallest as 11.6 MiB.
+
+Later Update: after asking for an advice from GST, I disabled media support before building new kernel img. Latest 8.7 MiB.
