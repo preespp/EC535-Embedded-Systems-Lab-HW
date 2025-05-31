@@ -1,4 +1,4 @@
-# EC535 Embedded Systems Lab & HW
+# Embedded Systems Lab & HW
 
 ## Lab
 
